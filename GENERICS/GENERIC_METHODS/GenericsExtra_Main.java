@@ -20,8 +20,19 @@ public class GenericsExtra_Main {
         }
         //printList(lpaStudents);
         printMoreLists(lpaStudents);
-    }
 
+        testList(new ArrayList<String>(List.of("Able","Barry","Charlie")));
+        testList(new ArrayList<Integer>(List.of(1,2,3)));
+    }
+    public static void testList(List<?> list){
+        for(var element : list){
+            if(element instanceof String s){
+                System.out.println("String : "+ s.toUpperCase());
+            }else if(element instanceof Integer i){
+                System.out.println("Integer : "+i.floatValue());
+            }
+        }
+    }
     public static <T extends Student> void printMoreLists(List<? extends Student> students){
         for(var student :students){
             System.out.println(student.getYearStarted()+ ": " + student);
