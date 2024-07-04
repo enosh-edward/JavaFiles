@@ -12,7 +12,7 @@ public class Employee {
             this("name");
         }
         public EmployeeComparator(String string) {
-            //TODO Auto-generated constructor stub
+            this.sortType=string;
         }
         @Override
         public int compare(Employee o1, Employee o2){
