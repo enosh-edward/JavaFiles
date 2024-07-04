@@ -11,8 +11,8 @@ public class Employee {
         public EmployeeComparator(){
             this("name");
         }
-        public EmployeeComparator(String string) {
-            this.sortType=string;
+        public EmployeeComparator(String sortType) {
+            this.sortType=sortType;
         }
         @Override
         public int compare(Employee o1, Employee o2){
