@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -24,7 +27,7 @@ public class ChainingLambdas {
             System.out.println(Arrays.toString(f0.apply(name)));
 
         Function<String,String> f1 =uCase
-                    .andThen(s -> s.concat("Buchalka"))
+                    .andThen(s -> s.concat(" Buchalka"))
                     .andThen(s-> s.split(" "))
                     .andThen(s-> s[1].toUpperCase()+ ", "+s[0]);
             System.out.println(f1.apply(name));
@@ -57,5 +60,27 @@ public class ChainingLambdas {
 
         Predicate<String> combined3 = p3.and(p4).negate();
         System.out.println("combined3 = "+ combined3.test(name));
+
+        record Person(String firstName, String lastName){}
+
+        List<Person> list =new ArrayList<>(Arrays.asList(
+                    new Person("Peter","Pan"),
+                    new Person("Peter","PumpkinEater"),
+                    new Person("Minnie","Mouse"),
+                    new Person("Mickey","Mouse")
+        ));
+
+        list.sort((o1,o2) -> o1.lastName.compareTo(o2.lastName));
+        list.forEach(System.out::println);
+
+        System.out.println("------------------------");
+        list.sort(Comparator.comparing(Person::lastName));
+        list.forEach(System.out::println);
+
+        System.out.println("-------------------------");
+        list.sort(Comparator.comparing(Person::lastName)
+                    .thenComparing(Person::firstName).reversed());
+        list.forEach(System.out::println);
+                
     }
 }
